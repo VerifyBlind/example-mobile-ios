@@ -91,7 +91,16 @@ final class DemoViewModel: ObservableObject {
 
     func copyResult() {
         UIPasteboard.general.string = resultText
-        toastText = L("toast_copied")
+        showToast(L("toast_copied"))
+    }
+
+    func copyLog() {
+        UIPasteboard.general.string = logText
+        showToast(L("toast_log_copied"))
+    }
+
+    private func showToast(_ text: String) {
+        toastText = text
         Task {
             try? await Task.sleep(nanoseconds: 2_000_000_000)
             toastText = nil

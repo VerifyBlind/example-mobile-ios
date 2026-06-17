@@ -10,6 +10,7 @@
 
 "btn_verify" = "Verify with VerifyBlind";
 "btn_clear" = "Clear";
+"btn_copy" = "Copy";
 "cd_copy" = "Copy";
 
 "section_result" = "Verification Result";
@@ -30,6 +31,7 @@
 "value_no" = "No";
 
 "toast_copied" = "Result copied";
+"toast_log_copied" = "Log copied";
 
 "log_initial" = "> Ready. Tap 'Verify with VerifyBlind'.\n";
 "log_cleared" = "> Log cleared.\n";

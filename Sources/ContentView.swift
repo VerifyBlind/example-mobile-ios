@@ -181,6 +181,14 @@ struct ContentView: View {
                     }
                     .foregroundColor(Theme.blue400)
                 }
+                Button(action: { vm.copyLog() }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "doc.on.doc").font(.system(size: 14))
+                        Text(L("btn_copy")).font(.system(size: 13))
+                    }
+                    .foregroundColor(Theme.blue400)
+                }
+                .padding(.leading, 8)
             }
             .padding(.bottom, 12)
 
