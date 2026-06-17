@@ -38,6 +38,9 @@ targets:
         TARGETED_DEVICE_FAMILY: "1"
         CODE_SIGN_STYLE: Manual
         GENERATE_INFOPLIST_FILE: YES
+        # Seyrek Info.plist: yalnızca özel anahtarlar (ITSAppUsesNonExemptEncryption).
+        # GENERATE_INFOPLIST_FILE standart anahtarları (ikon/orientation/versiyon) üstüne birleştirir.
+        INFOPLIST_FILE: Config/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         INFOPLIST_KEY_CFBundleDisplayName: VerifyBlind Demo
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
