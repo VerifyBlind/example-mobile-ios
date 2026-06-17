@@ -18,6 +18,7 @@ final class DemoViewModel: ObservableObject {
     private let sdk = VerifyBlindSDK(config: VerifyBlindConfig(
         partnerBackendUrl: DemoConfig.partnerBackendURL,
         generateEndpoint: DemoConfig.generateEndpoint,
+        verifyblindAppLinkBase: DemoConfig.appLinkBase,
         verifyblindApiUrl: DemoConfig.verifyblindApiURL
     ))
 

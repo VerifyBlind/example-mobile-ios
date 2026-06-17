@@ -11,4 +11,7 @@ enum DemoConfig {
 
     /// VerifyBlind relay (sonuç polling için: GET /api/pop/result/{nonce}).
     static let verifyblindApiURL = "https://api.verifyblind.com"
+
+    /// VerifyBlind Universal Link base (Android VERIFYBLIND_APP_LINK_BASE ile aynı).
+    static let appLinkBase = "https://app.verifyblind.com/request"
 }
