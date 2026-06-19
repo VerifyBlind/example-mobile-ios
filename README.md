@@ -8,7 +8,7 @@ zero-knowledge güvenliğinin parçası değil).
 - Mağaza/görünen ad: **VerifyBlind Demo**
 - SDK: `https://github.com/VerifyBlind/sdk-ios` (SwiftPM, `from: 2.1.0`)
 - Proje XcodeGen ile üretilir (`project.yml`); imzasız derleme + TestFlight CI'da yapılır.
-
+ 
 ## Akış
 1. "VerifyBlind ile Doğrula" → SDK ephemeral RSA keypair üretir, partner backend'den `nonce` alır.
 2. SDK VerifyBlind uygulamasını Universal Link ile açar (`app.verifyblind.com/request?...`).
