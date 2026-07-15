@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Export compliance: uygulama yalnızca Apple'ın kendi kripto framework'lerini
+	     (CryptoKit/Security) ve HTTPS kullanır → muaf. Bu anahtar, App Store Connect'in
+	     her build'de "App Encryption Documentation" sorusunu sormasını engeller. -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<!-- App-to-app geri dönüş şeması: VerifyBlind doğrulama bitince bu uygulamayı
+	     "verifyblinddemo://callback?nonce=..&status=.." ile öne getirir. Şema partner-portal'daki
+	     "app return scheme" (verifyblinddemo) ile eşleşmeli; example-android ile AYNI (tek portal kaydı). -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.verifyblind.example.return</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>verifyblinddemo</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

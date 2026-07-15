@@ -1,0 +1,65 @@
+/* example-mobile-android values/strings.xml ile birebir */
+
+"subtitle_test_app" = "Demo App";
+
+"section_parameters" = "Verification Parameters";
+"param_userid_title" = "User Identity";
+"param_userid_desc" = "Returns a unique identifier for the user.";
+"param_age_title" = "Age Verification (18+)";
+"param_age_desc" = "Verifies the user is 18 or older.";
+
+"btn_verify" = "Verify with VerifyBlind";
+"btn_clear" = "Clear";
+"btn_copy" = "Copy";
+"cd_copy" = "Copy";
+
+"section_result" = "Verification Result";
+"section_log" = "Developer Log";
+
+"result_initial" = "// Waiting for verification…";
+"result_waiting" = "// Waiting for result…";
+"result_cancelled_block" = "// %1$@\n// %2$@";
+"result_error_block" = "// error: %@";
+
+"status_success" = "● Success";
+"status_error" = "● Error";
+
+"overlay_opening" = "Please wait.\nOpening the VerifyBlind app…";
+"overlay_waiting" = "Please wait.\nWaiting for result…";
+"overlay_cancel" = "Cancel / New request";
+
+"value_yes" = "Yes";
+"value_no" = "No";
+
+"toast_copied" = "Result copied";
+"toast_log_copied" = "Log copied";
+
+"log_initial" = "> Ready. Tap 'Verify with VerifyBlind'.\n";
+"log_cleared" = "> Log cleared.\n";
+"log_ready" = "VerifyBlind SDK ready";
+"log_env" = "Environment: %@";
+"log_start" = "startAuthentication() started";
+"log_opening" = "Opening VerifyBlind app…";
+"log_request_created" = "Request created. Nonce: %@";
+"log_complete_in_app" = "Complete the verification in VerifyBlind; the result is queried when you return.";
+"log_polling" = "Waiting for result (polling)…";
+"log_waiting_secs" = "… waiting (%@s)";
+"log_result_applied" = "Result received and displayed.";
+"log_timeout" = "Timeout. The query resumes automatically when you reopen the app.";
+"log_polling_cancelled" = "Polling cancelled by user. You can send a new request.";
+"log_validations" = "Validations: %@";
+"log_cancel" = "%1$@ · reason=%2$@";
+
+"err_generic" = "Unexpected error";
+"err_start" = "Could not start: %@";
+
+"cancel_no_card_title" = "No registered card";
+"cancel_no_card_detail" = "The user has no ID card registered in the VerifyBlind app.";
+"cancel_declined_title" = "Permission denied";
+"cancel_declined_detail" = "The user did not allow data sharing.";
+"cancel_fingerprint_title" = "Biometric failed";
+"cancel_fingerprint_detail" = "Fingerprint / biometric verification failed.";
+"cancel_session_title" = "Session expired";
+"cancel_session_detail" = "The mobile session expired. Please try again.";
+"cancel_generic_title" = "Cancelled";
+"cancel_generic_detail" = "The user cancelled identity verification.";

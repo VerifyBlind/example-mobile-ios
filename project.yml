@@ -1,0 +1,53 @@
+name: VerifyBlindDemo
+options:
+  bundleIdPrefix: com.verifyblind
+  deploymentTarget:
+    iOS: "16.0"
+  developmentLanguage: tr
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    ENABLE_BITCODE: NO
+    DEVELOPMENT_TEAM: $(APPLE_TEAM_ID)
+    SWIFT_STRICT_CONCURRENCY: minimal
+
+configs:
+  Debug: debug
+  Release: release
+
+# SwiftPM bağımlılığı: VerifyBlind iOS SDK (App Attest İÇERMEZ — v2.1.0+).
+packages:
+  VerifyBlind:
+    url: https://github.com/VerifyBlind/sdk-ios
+    from: 2.1.0
+
+targets:
+  VerifyBlindDemo:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(IOS_BUNDLE_ID)
+        CURRENT_PROJECT_VERSION: $(BUILD_NUMBER)
+        MARKETING_VERSION: "1.0.0"
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGN_STYLE: Manual
+        GENERATE_INFOPLIST_FILE: YES
+        # Seyrek Info.plist: yalnızca özel anahtarlar (ITSAppUsesNonExemptEncryption).
+        # GENERATE_INFOPLIST_FILE standart anahtarları (ikon/orientation/versiyon) üstüne birleştirir.
+        INFOPLIST_FILE: Config/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_CFBundleDisplayName: VerifyBlind Demo
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+    configFiles:
+      Debug: Config/Release.xcconfig
+      Release: Config/Release.xcconfig
+    dependencies:
+      - package: VerifyBlind
+        product: VerifyBlind

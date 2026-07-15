@@ -1,0 +1,65 @@
+/* example-mobile-android values-tr/strings.xml ile birebir */
+
+"subtitle_test_app" = "Demo Uygulaması";
+
+"section_parameters" = "Doğrulama Parametreleri";
+"param_userid_title" = "Kullanıcı Kimliği";
+"param_userid_desc" = "Kullanıcıya ait benzersiz kimlik değeri döner.";
+"param_age_title" = "Yaş Doğrulaması (18+)";
+"param_age_desc" = "Kullanıcının 18 yaş veya üzerinde olduğunu doğrular.";
+
+"btn_verify" = "VerifyBlind ile Doğrula";
+"btn_clear" = "Temizle";
+"btn_copy" = "Kopyala";
+"cd_copy" = "Kopyala";
+
+"section_result" = "Doğrulama Sonucu";
+"section_log" = "Geliştirici Log";
+
+"result_initial" = "// Doğrulama bekleniyor…";
+"result_waiting" = "// Sonuç bekleniyor…";
+"result_cancelled_block" = "// %1$@\n// %2$@";
+"result_error_block" = "// hata: %@";
+
+"status_success" = "● Başarılı";
+"status_error" = "● Hata";
+
+"overlay_opening" = "Lütfen bekleyiniz.\nVerifyBlind uygulaması açılıyor…";
+"overlay_waiting" = "Lütfen bekleyiniz.\nSonuç bekleniyor…";
+"overlay_cancel" = "İptal / Yeni istek";
+
+"value_yes" = "Evet";
+"value_no" = "Hayır";
+
+"toast_copied" = "Sonuç kopyalandı";
+"toast_log_copied" = "Log kopyalandı";
+
+"log_initial" = "> Hazır. 'VerifyBlind ile Doğrula' butonuna basın.\n";
+"log_cleared" = "> Log temizlendi.\n";
+"log_ready" = "VerifyBlind SDK hazır";
+"log_env" = "Ortam: %@";
+"log_start" = "startAuthentication() başlatıldı";
+"log_opening" = "VerifyBlind uygulaması açılıyor…";
+"log_request_created" = "İstek oluşturuldu. Nonce: %@";
+"log_complete_in_app" = "VerifyBlind'de doğrulamayı tamamlayın; uygulamaya döndüğünüzde sonuç sorgulanır.";
+"log_polling" = "Sonuç bekleniyor (polling)…";
+"log_waiting_secs" = "… bekleniyor (%@sn)";
+"log_result_applied" = "Sonuç alındı ve ekrana yansıtıldı.";
+"log_timeout" = "Zaman aşımı. Uygulamaya tekrar geldiğinizde sorgu otomatik yenilenir.";
+"log_polling_cancelled" = "Bekleme kullanıcı tarafından iptal edildi. Yeni istek gönderebilirsiniz.";
+"log_validations" = "Validations: %@";
+"log_cancel" = "%1$@ · reason=%2$@";
+
+"err_generic" = "Beklenmeyen hata";
+"err_start" = "Başlatılamadı: %@";
+
+"cancel_no_card_title" = "Kayıtlı Kart Yok";
+"cancel_no_card_detail" = "Kullanıcının VerifyBlind uygulamasında kayıtlı kimlik kartı bulunmuyor.";
+"cancel_declined_title" = "İzin Verilmedi";
+"cancel_declined_detail" = "Kullanıcı veri paylaşımına izin vermedi.";
+"cancel_fingerprint_title" = "Biyometrik Başarısız";
+"cancel_fingerprint_detail" = "Parmak izi / biyometrik doğrulama başarısız oldu.";
+"cancel_session_title" = "Oturum Süresi Doldu";
+"cancel_session_detail" = "Mobil oturum süresi doldu. Lütfen tekrar deneyin.";
+"cancel_generic_title" = "İptal Edildi";
+"cancel_generic_detail" = "Kullanıcı kimlik doğrulamayı iptal etti.";

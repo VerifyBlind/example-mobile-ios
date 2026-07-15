@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Her zaman çalışır, secret GEREKTİRMEZ — uygulamanın derlendiğini doğrular.
+  build:
+    name: Compile check (iOS Simulator)
+    runs-on: macos-26
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate project
+        run: xcodegen generate
+      - name: Resolve SPM
+        run: xcodebuild -resolvePackageDependencies -project VerifyBlindDemo.xcodeproj -scheme VerifyBlindDemo
+      - name: Build (unsigned, iOS Simulator)
+        run: |
+          set -eo pipefail
+          xcodebuild build \
+            -project VerifyBlindDemo.xcodeproj \
+            -scheme VerifyBlindDemo \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO
+
+  # Secret'lar (App ID + App Store Connect anahtarı) eklenince TestFlight'a yükler.
+  # Eklenmeden önce: adımlar atlanır, job YEŞİL kalır (kırmızı CI gürültüsü yok).
+  testflight:
+    name: TestFlight (signing secrets gerekir)
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect signing secrets
+        id: sec
+        env:
+          ISSUER: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        run: |
+          if [ -n "$ISSUER" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::TestFlight secret'ları yok — adım atlandı. App ID + secret eklenince çalışır."
+          fi
+      - name: Install tools
+        if: steps.sec.outputs.ok == 'true'
+        run: |
+          brew install xcodegen
+          pip3 install --break-system-packages codemagic-cli-tools
+      - name: Build + sign + upload
+        if: steps.sec.outputs.ok == 'true'
+        env:
+          BUNDLE_ID: com.verifyblind.example
+          APP_STORE_APP_ID: ${{ secrets.APP_STORE_APP_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: bash scripts/ci/ios-build-upload.sh
