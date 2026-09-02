@@ -1,0 +1,6 @@
+// Bu dosya CI'da (scripts/ci/ios-build-upload.sh) TestFlight derlemesi sırasında
+// APPLE_TEAM_ID + güncel BUILD_NUMBER ile ÜZERİNE YAZILIR.
+// Buradaki değerler yalnızca imzasız simülatör derlemesi içindir; gizli bilgi YOK.
+APPLE_TEAM_ID =
+IOS_BUNDLE_ID = com.verifyblind.example
+BUILD_NUMBER = 1
