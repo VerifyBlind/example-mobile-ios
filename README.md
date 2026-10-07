@@ -182,3 +182,9 @@ Without these, `startAuthentication` falls back to Safari and the flow cannot co
 ### Configuration
 Test environment URLs live in `Sources/DemoConfig.swift` (not secret). Change `partnerBackendURL` to try
 it with your own partner backend.
+
+---
+
+## Lisans · License
+
+Apache License 2.0 — bkz. / see [LICENSE](LICENSE).
