@@ -12,7 +12,7 @@ zero-knowledge güvenliğinin parçası değil).
 
 - Bundle ID: `com.verifyblind.example` (Android örnekle aynı)
 - Mağaza/görünen ad: **VerifyBlind Demo**
-- SDK: `https://github.com/VerifyBlind/sdk-ios` (SwiftPM, `from: 2.3.1`)
+- SDK: `https://github.com/VerifyBlind/verifyblind-sdk-ios` (SwiftPM, `from: 2.3.1`)
 - Proje XcodeGen ile üretilir (`project.yml`); imzasız derleme + TestFlight CI'da yapılır.
  
 ## Akış
@@ -106,7 +106,7 @@ not part of VerifyBlind's zero-knowledge security).
 
 - Bundle ID: `com.verifyblind.example` (same as the Android example)
 - Store / display name: **VerifyBlind Demo**
-- SDK: `https://github.com/VerifyBlind/sdk-ios` (SwiftPM, `from: 2.3.1`)
+- SDK: `https://github.com/VerifyBlind/verifyblind-sdk-ios` (SwiftPM, `from: 2.3.1`)
 - The project is generated with XcodeGen (`project.yml`); an unsigned build + TestFlight happen in CI.
 
 ### Flow
