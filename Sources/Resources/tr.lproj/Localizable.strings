@@ -24,6 +24,13 @@
 
 "status_success" = "● Başarılı";
 "status_error" = "● Hata";
+"status_server_ok" = "● Sunucu doğruladı";
+"status_server_rejected" = "● Sunucu reddetti";
+"overlay_server_verifying" = "Lütfen bekleyiniz.\nSunucuda doğrulanıyor…";
+"log_server_verifying" = "Token sunucuya gönderiliyor, doğrulanıyor…";
+"log_server_ok" = "✅ Sunucu imzayı ve sorulan koşulları doğruladı.";
+"log_server_rejected" = "❌ Sunucu sonucu reddetti: %@";
+"err_no_token" = "sonuçta token yok (VerifyBlind iOS SDK 2.3.1 veya üstü gerekir)";
 "status_example" = "🔵 ÖRNEK";
 
 "overlay_opening" = "Lütfen bekleyiniz.\nVerifyBlind uygulaması açılıyor…";

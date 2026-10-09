@@ -18,11 +18,11 @@ configs:
   Debug: debug
   Release: release
 
-# SwiftPM bağımlılığı: VerifyBlind iOS SDK (App Attest İÇERMEZ — v2.1.0+).
+# SwiftPM bağımlılığı: VerifyBlind iOS SDK (App Attest İÇERMEZ — v2.1.0+; sonuçta `token` — v2.3.1+).
 packages:
   VerifyBlind:
     url: https://github.com/VerifyBlind/sdk-ios
-    from: 2.1.0
+    from: 2.3.1
 
 targets:
   VerifyBlindDemo:

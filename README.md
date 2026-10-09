@@ -12,7 +12,7 @@ zero-knowledge güvenliğinin parçası değil).
 
 - Bundle ID: `com.verifyblind.example` (Android örnekle aynı)
 - Mağaza/görünen ad: **VerifyBlind Demo**
-- SDK: `https://github.com/VerifyBlind/sdk-ios` (SwiftPM, `from: 2.1.0`)
+- SDK: `https://github.com/VerifyBlind/sdk-ios` (SwiftPM, `from: 2.3.1`)
 - Proje XcodeGen ile üretilir (`project.yml`); imzasız derleme + TestFlight CI'da yapılır.
  
 ## Akış
@@ -20,6 +20,9 @@ zero-knowledge güvenliğinin parçası değil).
 2. SDK VerifyBlind uygulamasını Universal Link ile açar (`app.verifyblind.com/request?...`).
 3. Kullanıcı doğrulamayı VerifyBlind'de tamamlar; bu demo'ya geri dönünce sonuç poll edilir
    (`scenePhase .active`), şifreli yanıt lokalde çözülür.
+4. Sonuçtaki `token` (enclave'in imzaladığı ham yanıt) partner backend'in doğrulama ucuna (`.../api/verify`)
+   gönderilir. Sunucu imzayı enclave public key'iyle doğrular, nonce'u bir kez tüketir ve sonucu kendi sorduğu
+   koşula göre okur; ekranda "Sunucu doğruladı" ya da "Sunucu reddetti" görünür. **Karar telefonda verilmez.**
 
 ## Uygulamaya geri dönüş (deeplink)
 VerifyBlind, doğrulama bitince (başarı **veya** iptal) kullanıcıyı bu demo'ya geri getirir:
@@ -103,7 +106,7 @@ not part of VerifyBlind's zero-knowledge security).
 
 - Bundle ID: `com.verifyblind.example` (same as the Android example)
 - Store / display name: **VerifyBlind Demo**
-- SDK: `https://github.com/VerifyBlind/sdk-ios` (SwiftPM, `from: 2.1.0`)
+- SDK: `https://github.com/VerifyBlind/sdk-ios` (SwiftPM, `from: 2.3.1`)
 - The project is generated with XcodeGen (`project.yml`); an unsigned build + TestFlight happen in CI.
 
 ### Flow
@@ -111,6 +114,10 @@ not part of VerifyBlind's zero-knowledge security).
 2. The SDK opens the VerifyBlind app via a Universal Link (`app.verifyblind.com/request?...`).
 3. The user completes verification in VerifyBlind; back in this demo the result is polled
    (`scenePhase .active`) and the encrypted response is decrypted locally.
+4. The `token` in the result (the raw response signed by the enclave) is sent to the partner backend's verify
+   endpoint (`.../api/verify`). The server checks the signature with the enclave public key, consumes the nonce
+   once and reads the result against the condition it asked; the screen shows "Verified by server" or
+   "Rejected by server". **The decision is not made on the phone.**
 
 ### Returning to your app (deeplink)
 VerifyBlind brings the user back to this demo when the flow ends (success **or** cancel):

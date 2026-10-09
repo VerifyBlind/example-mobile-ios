@@ -24,6 +24,13 @@
 
 "status_success" = "● Success";
 "status_error" = "● Error";
+"status_server_ok" = "● Verified by server";
+"status_server_rejected" = "● Rejected by server";
+"overlay_server_verifying" = "Please wait.\nVerifying on the server…";
+"log_server_verifying" = "Sending the token to the server for verification…";
+"log_server_ok" = "✅ The server verified the signature and the asked conditions.";
+"log_server_rejected" = "❌ Server rejected the result: %@";
+"err_no_token" = "the result has no token (VerifyBlind iOS SDK 2.3.1 or later is required)";
 "status_example" = "🔵 EXAMPLE";
 
 "overlay_opening" = "Please wait.\nOpening the VerifyBlind app…";

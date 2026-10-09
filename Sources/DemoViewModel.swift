@@ -57,6 +57,9 @@ final class DemoViewModel: ObservableObject {
         guard !isBusy else { return }
         if previewEnabled { runPreview(); return }
         statusIsExample = false
+        // Bu demo ziyaretçinin ne doğrulanacağını seçmesine izin verir; test.verifyblind.com bunu yalnız
+        // izin listesinden kabul eder ve sorulanı nonce ile birlikte saklar. GERÇEK bir uygulamada ne
+        // sorulacağına uygulama değil, sunucunuzdaki başlatma ucu karar verir.
         let validations = currentValidations()
 
         isBusy = true
@@ -187,8 +190,9 @@ final class DemoViewModel: ObservableObject {
             count += 1
             do {
                 if let result = try await sdk.checkVerificationResult(nonce: nonce) {
-                    applyResult(result)
                     activeNonce = nil
+                    applyResult(result)
+                    await verifyOnServer(result)
                     return
                 }
             } catch let e as VerifyBlindError {
@@ -228,13 +232,66 @@ final class DemoViewModel: ObservableObject {
         }
         if let nsbd = result["nsbd_id"] { pairs.append(("nsbd_id", "\(nsbd)")) }
         if let doc = result["doc_id"] { pairs.append(("doc_id", "\(doc)")) }
-        let reserved: Set<String> = ["user_id", "nsbd_id", "doc_id", "nonce", "validations"]
+        let reserved: Set<String> = ["user_id", "nsbd_id", "doc_id", "nonce", "validations", "token"]
         for (k, v) in result where !reserved.contains(k) { pairs.append((k, formatVal(v))) }
 
         resultText = jsonString(pairs)
         statusText = L("status_success")
         statusIsSuccess = true
         appendLog(L("log_result_applied"))
+    }
+
+    // MARK: - Sunucuda doğrulama (A deseni)
+
+    /// Telefondaki sonuç yalnızca gösterim içindir; karar SUNUCUDA verilir. SDK sonucun yanında
+    /// enclave'in imzaladığı ham yanıtı `token` olarak verir (web widget'ının onSuccess token'ı ile
+    /// aynı biçim). Token sunucunun doğrulama ucuna gönderilir; sunucu imzayı enclave public key'iyle
+    /// doğrular, nonce'u bir kez tüketir ve sonucu kendi sorduğu koşula göre okur.
+    private func verifyOnServer(_ result: [String: Any]) async {
+        guard let token = result["token"] as? String, !token.isEmpty else {
+            appendLog(L("log_server_rejected", L("err_no_token")))
+            statusText = L("status_server_rejected")
+            statusIsSuccess = false
+            return
+        }
+
+        overlayKey = "overlay_server_verifying"
+        appendLog(L("log_server_verifying"))
+        let failure: String?
+        do {
+            failure = try await postToken(token)
+        } catch {
+            failure = Self.isConnectionProblem(error) ? L("err_no_connection") : error.localizedDescription
+        }
+
+        if let failure {
+            appendLog(L("log_server_rejected", failure))
+            statusText = L("status_server_rejected")
+            statusIsSuccess = false
+        } else {
+            appendLog(L("log_server_ok"))
+            statusText = L("status_server_ok")
+            statusIsSuccess = true
+        }
+    }
+
+    /// Token'ı `<partner backend>/<verify endpoint>`'e POST eder. Başarıda nil, aksi halde hata metni döner.
+    private func postToken(_ token: String) async throws -> String? {
+        let base = DemoConfig.partnerBackendURL.hasSuffix("/")
+            ? String(DemoConfig.partnerBackendURL.dropLast()) : DemoConfig.partnerBackendURL
+        guard let url = URL(string: "\(base)/\(DemoConfig.verifyEndpoint)") else { return L("err_generic") }
+
+        var request = URLRequest(url: url, timeoutInterval: 15)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: ["token": token])
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        let code = (response as? HTTPURLResponse)?.statusCode ?? 0
+        let json = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
+        if (200...299).contains(code), json?["success"] as? Bool == true { return nil }
+        if let message = json?["error"] as? String, !message.isEmpty { return message }
+        return "HTTP \(code)"
     }
 
     private func showCancelled(_ e: VerifyBlindError) {

@@ -9,6 +9,10 @@ enum DemoConfig {
     /// Partner backend üzerindeki işlem-başlatma uç noktası (base'e eklenir → .../api/generate).
     static let generateEndpoint = "generate"
 
+    /// Partner backend üzerindeki doğrulama uç noktası (base'e eklenir → .../api/verify).
+    /// Sonuçtaki `token` buraya gönderilir; karar sunucuda verilir.
+    static let verifyEndpoint = "verify"
+
     /// VerifyBlind relay (sonuç polling için: GET /api/pop/result/{nonce}).
     static let verifyblindApiURL = "https://api.verifyblind.com"
 
